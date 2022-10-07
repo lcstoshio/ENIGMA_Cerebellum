@@ -24,4 +24,12 @@ singularity run --cleanenv -B $PWD:$PWD acapulco-0.2.1.sif -i
 output/T1_run_s5/T1_run_s5.nii.gz -o output/T1_run_s5
 
 
-https://drive.google.com/file/d/1y5k-tFNcaQAiyXVi1Nm_yJFF8pzBR356/view?usp=sharing
+
+
+### singularity
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH" -O acapulco-0.2.1.sif && rm -rf /tmp/cookies.txt
+
+
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=12kncXwW9bG14LbGmJQoRf-v2AI9FCfkB' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=12kncXwW9bG14LbGmJQoRf-v2AI9FCfkB" -O R.sif && rm -rf /tmp/cookies.txt
+
+
