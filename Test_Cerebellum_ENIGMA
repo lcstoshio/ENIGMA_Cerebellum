@@ -1,0 +1,27 @@
+cd /mnt/genetica_2
+mkdir Lucas
+cd Lucas
+mkdir enigma
+cd enigma
+mkdir acapulco
+mkdir input
+cd acapulco
+
+cp -R /mnt/imagem_2/inpd_wave_0/10001/T1_run_s5/T1_run_s5.nii.gz /mnt/imagem_2/inpd_wave_0/10006/T1_run_s6/T1_run_s6.nii.gz /mnt/genetica_2/Lucas/input
+
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1UTTYaIpJNv0CmYA43woCdJLnaatAaamL' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1UTTYaIpJNv0CmYA43woCdJLnaatAaamL" -O acapulco-0.2.1.tar.gz && rm -rf /tmp/cookies.txt
+
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1JyUd37wshsxraWCO1yetvP82FS4kasvr' -O QC_scripts.zip
+unzip QC_scripts.zip
+
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1y5k-tFNcaQAiyXVi1Nm_yJFF8pzBR356' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1y5k-tFNcaQAiyXVi1Nm_yJFF8pzBR356" -O calculate_icv.tar && rm -rf /tmp/cookies.txt
+
+#cd acapulco
+mkdir output
+cp ../input/T1_run_s5.nii.gz output/T1_run_s5/
+
+singularity run --cleanenv -B $PWD:$PWD acapulco-0.2.1.sif -i
+output/T1_run_s5/T1_run_s5.nii.gz -o output/T1_run_s5
+
+
+https://drive.google.com/file/d/1y5k-tFNcaQAiyXVi1Nm_yJFF8pzBR356/view?usp=sharing
