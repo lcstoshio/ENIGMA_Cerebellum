@@ -23,7 +23,7 @@ cp ../input/T1_run_s5.nii.gz output/T1_run_s5/
 singularity run --cleanenv -B $PWD:$PWD acapulco-0.2.1.sif -i output/T1_run_s5/T1_run_s5.nii.gz -o output/T1_run_s5
 
 
-
+até 13min intro software e cerebelo, até 53min acapulco qc q&a, até final SUIT
 
 
 module load singularity
