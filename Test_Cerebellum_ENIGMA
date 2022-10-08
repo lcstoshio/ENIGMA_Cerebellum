@@ -20,11 +20,13 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 mkdir output
 cp ../input/T1_run_s5.nii.gz output/T1_run_s5/
 
-singularity run --cleanenv -B $PWD:$PWD acapulco-0.2.1.sif -i
-output/T1_run_s5/T1_run_s5.nii.gz -o output/T1_run_s5
+singularity run --cleanenv -B $PWD:$PWD acapulco-0.2.1.sif -i output/T1_run_s5/T1_run_s5.nii.gz -o output/T1_run_s5
 
 
 
+
+
+module load singularity
 
 ### singularity
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH" -O acapulco-0.2.1.sif && rm -rf /tmp/cookies.txt
