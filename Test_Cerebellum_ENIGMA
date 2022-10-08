@@ -20,7 +20,31 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 mkdir output
 cp ../input/T1_run_s5.nii.gz output/T1_run_s5/
 
+# single run
 singularity run --cleanenv -B $PWD:$PWD acapulco-0.2.1.sif -i output/T1_run_s5/T1_run_s5.nii.gz -o output/T1_run_s5
+
+# multiple run
+# creating file list ids
+cd /mnt/genetica_2/Lucas/enigma/input
+ls $PWD/*.nii.gz >> file_list.txt
+
+# move list to acapulco folder
+mv file_list.txt ../acapulco
+cd ../acapulco
+
+# loop do singularity para seccionar o cerebelo (6min50s para 2 amostras)
+for file in $(cat file_list.txt); do
+subj=$(basename $file .nii.gz)
+mkdir output/${subj}
+cp $file output/${subj}
+singularity run --cleanenv -B $PWD:$PWD acapulco-0.2.1.sif -i output/${subj}/${subj}.nii.gz -o output/${subj};
+done
+
+# test copiando o script do vídeo, ele faz boa parte menos a correção para o ICV
+singularity exec --cleanenv -B $PWD:$PWD ./R.sif Rscript ./QC_Master.R ./output
+
+
+
 
 
 até 13min intro software e cerebelo, até 53min acapulco qc q&a, até final SUIT
