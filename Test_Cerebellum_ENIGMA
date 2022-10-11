@@ -9,12 +9,18 @@ cd acapulco
 
 cp -R /mnt/imagem_2/inpd_wave_0/10001/T1_run_s5/T1_run_s5.nii.gz /mnt/imagem_2/inpd_wave_0/10006/T1_run_s6/T1_run_s6.nii.gz /mnt/genetica_2/Lucas/input
 
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1UTTYaIpJNv0CmYA43woCdJLnaatAaamL' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1UTTYaIpJNv0CmYA43woCdJLnaatAaamL" -O acapulco-0.2.1.tar.gz && rm -rf /tmp/cookies.txt
-
 wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1JyUd37wshsxraWCO1yetvP82FS4kasvr' -O QC_scripts.zip
 unzip QC_scripts.zip
 
+### DOCKER
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1UTTYaIpJNv0CmYA43woCdJLnaatAaamL' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1UTTYaIpJNv0CmYA43woCdJLnaatAaamL" -O acapulco-0.2.1.tar.gz && rm -rf /tmp/cookies.txt
+
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1y5k-tFNcaQAiyXVi1Nm_yJFF8pzBR356' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1y5k-tFNcaQAiyXVi1Nm_yJFF8pzBR356" -O calculate_icv.tar && rm -rf /tmp/cookies.txt
+
+### SINGULARITY
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH" -O acapulco-0.2.1.sif && rm -rf /tmp/cookies.txt
+
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=12kncXwW9bG14LbGmJQoRf-v2AI9FCfkB' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=12kncXwW9bG14LbGmJQoRf-v2AI9FCfkB" -O R.sif && rm -rf /tmp/cookies.txt
 
 #cd acapulco
 mkdir output
@@ -52,10 +58,94 @@ até 13min intro software e cerebelo, até 53min acapulco qc q&a, até final SUI
 
 module load singularity
 
-### singularity
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1mfai0lZLX2jSZCd8NRyMSR0DTtkOeNKH" -O acapulco-0.2.1.sif && rm -rf /tmp/cookies.txt
 
 
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=12kncXwW9bG14LbGmJQoRf-v2AI9FCfkB' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=12kncXwW9bG14LbGmJQoRf-v2AI9FCfkB" -O R.sif && rm -rf /tmp/cookies.txt
 
 
+
+
+
+################ IMPUTAÇÃO
+
+cd mnt/genetica_2/Lucas/enigma
+mkdir genetics
+cd genetics
+
+# Download bed bim fam
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id= 1Ox2hMVpr7UXSOC80DgkDigtvHkovG7t-  ' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id= 1Ox2hMVpr7UXSOC80DgkDigtvHkovG7t-  " -O BHRC_Probands.rar && rm -rf /tmp/cookies.txt
+
+# Plink 1.9
+wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20220402.zip
+unzip plink_linux_x86_64_20220402.zip
+
+# R already installed i guess
+
+# HTSlib download - bgzip and tabix
+# wget https://github.com/samtools/htslib/releases/download/1.16/htslib-1.16.tar.bz2
+
+# VCFtools
+# wget https://sourceforge.net/projects/vcftools/files/latest/download
+
+# Download of files from the tutorial
+wget "http://genepi.qimr.edu.au/staff/sarahMe/enigma/MDS/HM3_b37.bed.gz"
+wget "http://genepi.qimr.edu.au/staff/sarahMe/enigma/MDS/HM3_b37.bim.gz"
+wget "http://genepi.qimr.edu.au/staff/sarahMe/enigma/MDS/HM3_b37.fam.gz"
+
+# Doing the QC (I think it was already done
+export datafileraw=./BHRC_Probands
+plink --bfile $datafileraw --hwe 1e-6 --geno 0.05 --maf 0.01 --noweb --make-bed --out ${datafileraw}_filtered
+
+# Extracting only the snps in common between both files
+gunzip HM3_b37*.gz
+export datafile=${datafileraw}_filtered
+awk '{print $2}' HM3_b37.bim > HM3_b37.snplist.txt
+plink --bfile $datafile --extract HM3_b37.snplist.txt --make-bed --noweb --out local
+awk '{if	(($5=="T"	&& $6=="A")||($5=="A"&&	$6=="T")||($5=="C" &&	$6=="G")||($5=="G" &&	$6=="C"))	 print $2,	"ambig"	;	else print	$2;}' $datafile.bim | grep -v ambig > local.snplist.txt
+plink --bfile HM3_b37 --extract local.snplist.txt --make-bed --noweb --out external
+
+# Merging the two sets of plink files
+plink --bfile local --bmerge external.bed external.bim external.fam --make-bed --noweb --out HM3_b37merge
+  
+##### MDS analysis
+plink --bfile HM3_b37merge --cluster --mind .05 --mds-plot4 --extract local.snplist.txt --noweb --out HM3_b37mds
+awk 'BEGIN{OFS=","};{print $1, $2, $3,	$4,	$5,	$6,	$7}' >> HM3_b37mds2R.mds.csv
+HM3_b37mds.mds
+
+R
+
+#install.packages("calibrate")
+library(calibrate)
+mds.cluster <- read.csv("HM3_b37mds2R.mds.csv", header=T);
+colors=rep("red", length(mds.cluster$C1);
+colors[which(mds.cluster$FID ==	"CEU")]	<- "lightblue";
+colors[which(mds.cluster$FID ==	"CHB")]	<‐ "brown";
+colors[which(mds.cluster$FID ==	"YRI")]	<‐ "yellow";
+colors[which(mds.cluster$FID ==	"TSI")]	<‐ "green";
+colors[which(mds.cluster$FID ==	"JPT")]	<‐ "purple";
+colors[which(mds.cluster$FID ==	"CHD")]	<‐ "orange";
+colors[which(mds.cluster$FID ==	"MEX")]	<‐ "grey50";
+colors[which(mds.cluster$FID ==	"GIH")]	<‐ "black";
+colors[which(mds.cluster$FID ==	"ASW")]	<‐ "darkolivegreen";
+colors[which(mds.cluster$FID ==	"LWK")]	<‐ "magenta";
+colors[which(mds.cluster$FID ==	"MKK")]	<‐ "darkblue";
+pdf(file="mdsplot.pdf",width=7,height=7)
+
+plot(rev(mds.cluster$C2), rev(mds.cluster$C1), col=rev(colors), ylab="Dimension 1", xlab="Dimension 2", pch=20)
+
+legend("topright",	c("My	Sample",	"CEU",	"CHB",	"YRI",	"TSI",	"JPT",	"CHD",	"MEX",	"GIH", "ASW","LWK",	"MKK"),	fill=c("red",	"lightblue",	"brown",	"yellow",	"green",	"purple",	"orange",	"grey50",	"black",	"darkolivegreen",	"magenta",	"darkblue"))
+
+dev.off();
+
+
+
+####### Going back to imputation
+awk	'{	if	(($5=="T"	&&	$6=="A")||($5=="A"	&&	$6=="T")||($5=="C"	&&	$6=="G")||($5=="G"	&&	$6=="C"))	print	$2,	"ambig"	;	else	print	$2	;}'	$datafile.bim	|	grep	ambig	|	awk	'{print	$1}'	>	ambig.list
+plink	--bfile	$datafile	--exclude	ambig.list	--make-founders	--out	lastQC	--maf	0.01	--hwe	0.000001	--make-bed	--noweb	
+awk	'{print	$2,		$1":"$4}' lastQC.bim >	updateSNPs.txt
+plink	--bfile	lastQC --update-name updateSNPs.txt	--make-bed	--out	lastQCb37	--noweb	--listduplicate-vars
+plink	--bfile	lastQCb37 --exclude	lastQCb37.dupvar	--out	lastQCb37_noduplicates --make-bed	--noweb
+
+for	i	in	{1..22}	
+do	
+plink	--bfile lastQCb37_noduplicates --chr	$i	--recode	vcf	--out	BHRC_chr"$i" vcf-sort	BHRC_chr"$i".vcf	|	bgzip	-c	>	BHRC_chr"$i".vcf.gz
+done
