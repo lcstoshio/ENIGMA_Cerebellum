@@ -60,6 +60,17 @@ module load singularity
 
 
 
+# copying all the T1 files from the script
+cp -R /mnt/imagem_2/inpd_wave_0/10001/T1_run_s5/T1_run_s5.nii.gz /mnt/imagem_2/inpd_wave_0/10006/T1_run_s6/T1_run_s6.nii.gz /mnt/genetica_2/Lucas/input
+/mnt/imagem_2/nii/inpd_wave_0/T1
+
+find /mnt/imagem_2/nii/inpd_wave_0/T1/ -type f -name '*.nii.gz' -exec cp '{}' /mnt/genetica_2/Lucas/enigma/input ';'
+cd /mnt/genetica_2/Lucas/enigma/input
+ls -1 | wc -l # 871 arquivos de neuroimagem copiados
+
+
+
+
 
 
 
